@@ -1,0 +1,12 @@
+{
+  "name": "ogx-systems",
+  "version": "1.0.0",
+  "description": "OGX Systems — Core Infrastructure Layer for the OGX Empire. Includes: agents, workflows, monitoring, sentinel workers, cloud pipelines.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
