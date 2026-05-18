@@ -1,0 +1,12 @@
+# Default owner for all files
+* @DudeStunna1
+
+# Internal modules ownership
+/os/ @DudeStunna1
+/minios/ @DudeStunna1
+/cores-os/ @DudeStunna1
+/agents/ @DudeStunna1
+
+# Governance and CI ownership
+/.github/ @DudeStunna1
+/docs/governance/ @DudeStunna1

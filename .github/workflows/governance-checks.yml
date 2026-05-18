@@ -1,0 +1,87 @@
+name: governance-checks
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+      - 'hotfix/**'
+      - 'thara/**'
+      - 'ogx-prime/**'
+      - 'os/**'
+      - 'minios/**'
+      - 'cores-os/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build (if available)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build --if-present
+          else
+            echo "No package.json found; build skipped by design."
+          fi
+
+  tests:
+    name: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test (if available)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm test --if-present
+          else
+            echo "No package.json found; tests skipped by design."
+          fi
+
+  quality:
+    name: quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch naming policy
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -euo pipefail
+          pattern='^(main|develop|release/.+|hotfix/.+|thara/.+|ogx-prime/.+|os/.+|minios/.+|cores-os/.+|feature/.+|bugfix/.+|chore/.+)$'
+          if [[ "$BRANCH_NAME" =~ $pattern ]]; then
+            echo "Branch name '$BRANCH_NAME' is valid."
+          else
+            echo "Invalid branch name '$BRANCH_NAME'." >&2
+            exit 1
+          fi
+
+  dependency-review:
+    name: dependency-review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+
+  secret-scan:
+    name: secret-scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
