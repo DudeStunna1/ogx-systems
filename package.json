@@ -1,0 +1,12 @@
+{
+  "name": "ogx-systems",
+  "private": true,
+  "version": "1.0.0",
+  "description": "OGX Systems platform workspace",
+  "scripts": {
+    "dev": "npm --prefix apps/web run dev",
+    "build": "npm --prefix apps/web run build",
+    "lint": "npm --prefix apps/web run lint",
+    "test": "npm --prefix apps/web run test"
+  }
+}
