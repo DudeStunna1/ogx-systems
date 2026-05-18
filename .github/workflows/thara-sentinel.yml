@@ -1,0 +1,291 @@
+name: THARA Sentinel Intelligence
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "release/**"
+      - "hotfix/**"
+      - "thara/**"
+      - "ogx/**"
+      - "oogx/**"
+      - "ogx-prime/**"
+      - "cores-os/**"
+      - "minios/**"
+      - "feature/**"
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, ready_for_review]
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: "Branch or SHA to analyze"
+        required: false
+        default: ""
+      force_domain:
+        description: "Override domain detection (thara/ogx/ogx-prime/cores-os/minios/oogx)"
+        required: false
+        default: ""
+  schedule:
+    # Daily audit sweep at 06:00 UTC
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  checks: write
+
+jobs:
+  # ──────────────────────────────────────────────────────────────
+  # JOB 1: Detect which brand domain is affected
+  # ──────────────────────────────────────────────────────────────
+  detect-domain:
+    name: "🔍 Detect Brand Domain"
+    runs-on: ubuntu-latest
+    outputs:
+      domain: ${{ steps.detect.outputs.domain }}
+      risk_level: ${{ steps.detect.outputs.risk_level }}
+      required_approvals: ${{ steps.detect.outputs.required_approvals }}
+      required_checks: ${{ steps.detect.outputs.required_checks }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect domain from branch / changed files
+        id: detect
+        shell: bash
+        run: |
+          REF="${{ github.head_ref || github.ref_name }}"
+          FORCE="${{ inputs.force_domain }}"
+
+          # Allow manual override
+          if [[ -n "$FORCE" ]]; then
+            DOMAIN="$FORCE"
+          elif [[ "$REF" == thara/* ]]; then
+            DOMAIN="thara"
+          elif [[ "$REF" == ogx-prime/* ]]; then
+            DOMAIN="ogx-prime"
+          elif [[ "$REF" == ogx/* ]]; then
+            DOMAIN="ogx"
+          elif [[ "$REF" == oogx/* ]]; then
+            DOMAIN="oogx"
+          elif [[ "$REF" == cores-os/* ]]; then
+            DOMAIN="cores-os"
+          elif [[ "$REF" == minios/* ]]; then
+            DOMAIN="minios"
+          else
+            # Inspect changed files for domain hints
+            CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+            if echo "$CHANGED" | grep -q "^thara/"; then
+              DOMAIN="thara"
+            elif echo "$CHANGED" | grep -q "^ogx-prime/"; then
+              DOMAIN="ogx-prime"
+            elif echo "$CHANGED" | grep -q "^cores-os/"; then
+              DOMAIN="cores-os"
+            elif echo "$CHANGED" | grep -q "^minios/"; then
+              DOMAIN="minios"
+            elif echo "$CHANGED" | grep -q "^oogx/"; then
+              DOMAIN="oogx"
+            elif echo "$CHANGED" | grep -q "^ogx/"; then
+              DOMAIN="ogx"
+            else
+              DOMAIN="default"
+            fi
+          fi
+
+          # Map domain → risk + approvals + checks
+          case "$DOMAIN" in
+            thara)
+              RISK="critical"; APPROVALS=2; CHECKS="build,test,quality,secret-scan,e2e";;
+            ogx-prime)
+              RISK="critical"; APPROVALS=2; CHECKS="build,test,quality,performance-benchmark,dependency-review";;
+            cores-os)
+              RISK="critical"; APPROVALS=2; CHECKS="build,test,hardening-scan,dependency-review,secret-scan";;
+            ogx|oogx)
+              RISK="standard"; APPROVALS=1; CHECKS="build,test,quality";;
+            minios)
+              RISK="low"; APPROVALS=1; CHECKS="build,compatibility-matrix";;
+            *)
+              RISK="low"; APPROVALS=1; CHECKS="build,lint";;
+          esac
+
+          echo "domain=$DOMAIN"           >> "$GITHUB_OUTPUT"
+          echo "risk_level=$RISK"         >> "$GITHUB_OUTPUT"
+          echo "required_approvals=$APPROVALS" >> "$GITHUB_OUTPUT"
+          echo "required_checks=$CHECKS"  >> "$GITHUB_OUTPUT"
+
+          echo "### THARA-SI Detection" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Field | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Domain | \`$DOMAIN\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Risk Level | \`$RISK\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Required Approvals | \`$APPROVALS\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Required Checks | \`$CHECKS\` |" >> "$GITHUB_STEP_SUMMARY"
+
+  # ──────────────────────────────────────────────────────────────
+  # JOB 2: Publish pre-analyzed decision as PR comment
+  # ──────────────────────────────────────────────────────────────
+  publish-decision:
+    name: "📋 Publish THARA-SI Decision"
+    needs: detect-domain
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Post decision comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const domain       = "${{ needs.detect-domain.outputs.domain }}";
+            const risk         = "${{ needs.detect-domain.outputs.risk_level }}";
+            const approvals    = "${{ needs.detect-domain.outputs.required_approvals }}";
+            const checks       = "${{ needs.detect-domain.outputs.required_checks }}";
+            const actor        = context.actor;
+            const branch       = context.payload.pull_request.head.ref;
+            const now          = new Date().toISOString();
+
+            const riskEmoji = { critical: "🔴", standard: "🟡", low: "🟢" }[risk] ?? "⚪";
+
+            const body = [
+              "## 🤖 THARA Sentinel Intelligence — Décision Pré-Analysée",
+              "",
+              `> Analyse automatique générée le **${now}** pour \`${actor}\``,
+              "",
+              "---",
+              "",
+              "### 📊 Diagnostic",
+              `| Champ | Valeur |`,
+              `|---|---|`,
+              `| 🏷️ Domaine détecté | \`${domain}\` |`,
+              `| ${riskEmoji} Niveau de risque | \`${risk}\` |`,
+              `| 👥 Approbations requises | \`${approvals}\` |`,
+              `| ✅ Checks obligatoires | ${checks.split(',').map(c => `\`${c}\``).join(' · ')} |`,
+              `| 🌿 Branche | \`${branch}\` |`,
+              "",
+              "---",
+              "",
+              "### ▶️ Prochaines Étapes",
+              "1. Assurer que tous les checks ci-dessus passent",
+              `2. Obtenir **${approvals}** approbation(s) de reviewer(s) qualifié(s)`,
+              "3. Commenter `/approve` pour déclencher le pipeline auto-execute",
+              "",
+              "---",
+              "",
+              "### 🎯 Commandes Disponibles",
+              "| Commande | Action |",
+              "|---|---|",
+              "| `/thara analyze` | Relancer l'analyse de domaine |",
+              "| `/thara approve` | Déclencher auto-execute pipeline |",
+              "| `/thara rollback` | Annuler et notifier l'équipe |",
+              "",
+              "---",
+              "*THARA Sentinel Intelligence · OGX Systems · DIAMONDLY CRAFTED*"
+            ].join("\n");
+
+            // Find existing THARA-SI comment to update instead of spamming
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.data.find(c =>
+              c.user.type === 'Bot' &&
+              c.body.includes('THARA Sentinel Intelligence')
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Apply domain label
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const domain = "${{ needs.detect-domain.outputs.domain }}";
+            const label  = `domain:${domain}`;
+            const risk   = "${{ needs.detect-domain.outputs.risk_level }}";
+
+            // Ensure labels exist (create if missing)
+            const colorMap = { critical: "d93f0b", standard: "fbca04", low: "0075ca" };
+            for (const [l, color] of Object.entries({ [label]: colorMap[risk] ?? "cccccc" })) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: l,
+                });
+              } catch {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: l,
+                  color,
+                });
+              }
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [l],
+              });
+            }
+
+  # ──────────────────────────────────────────────────────────────
+  # JOB 3: Daily audit sweep (scheduled)
+  # ──────────────────────────────────────────────────────────────
+  daily-audit:
+    name: "📅 Daily Audit Sweep"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate audit summary
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+
+            const now = new Date();
+            const stale = prs.filter(pr => {
+              const age = (now - new Date(pr.updated_at)) / 3600000;
+              return age > 48;
+            });
+
+            let summary = `# THARA-SI Daily Audit — ${now.toISOString().split('T')[0]}\n\n`;
+            summary += `**Open PRs:** ${prs.length}  |  **Stale (>48h):** ${stale.length}\n\n`;
+
+            if (stale.length > 0) {
+              summary += `## ⚠️ Stale Pull Requests\n`;
+              for (const pr of stale) {
+                const age = Math.floor((now - new Date(pr.updated_at)) / 3600000);
+                summary += `- [#${pr.number}](${pr.html_url}) — \`${pr.title}\` · ${age}h sans activité\n`;
+              }
+            }
+
+            core.summary.addRaw(summary);
+            await core.summary.write();

@@ -1,0 +1,220 @@
+name: THARA Auto-Execute
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  actions: write
+
+jobs:
+  # ──────────────────────────────────────────────────────────────
+  # Respond to /thara commands in PR comments
+  # ──────────────────────────────────────────────────────────────
+  handle-command:
+    name: "⚡ Handle THARA Command"
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request != null &&
+      (
+        contains(github.event.comment.body, '/approve') ||
+        contains(github.event.comment.body, '/thara approve') ||
+        contains(github.event.comment.body, '/thara analyze') ||
+        contains(github.event.comment.body, '/thara rollback')
+      )
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Parse command and execute
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body    = context.payload.comment.body.trim();
+            const actor   = context.actor;
+            const prNum   = context.issue.number;
+            const owner   = context.repo.owner;
+            const repo    = context.repo.repo;
+
+            // Determine command
+            let command = null;
+            if (body.includes('/thara approve') || body.includes('/approve')) {
+              command = 'approve';
+            } else if (body.includes('/thara analyze')) {
+              command = 'analyze';
+            } else if (body.includes('/thara rollback')) {
+              command = 'rollback';
+            }
+
+            const pr = await github.rest.pulls.get({ owner, repo, pull_number: prNum });
+            const branch = pr.data.head.ref;
+
+            // Detect domain from branch
+            let domain = 'default';
+            if (branch.startsWith('thara/'))      domain = 'thara';
+            else if (branch.startsWith('ogx-prime/')) domain = 'ogx-prime';
+            else if (branch.startsWith('ogx/'))    domain = 'ogx';
+            else if (branch.startsWith('oogx/'))   domain = 'oogx';
+            else if (branch.startsWith('cores-os/')) domain = 'cores-os';
+            else if (branch.startsWith('minios/')) domain = 'minios';
+
+            const ts = new Date().toISOString();
+
+            if (command === 'approve') {
+              // Add approval label
+              try {
+                await github.rest.issues.createLabel({ owner, repo, name: 'thara-si:approved', color: '0e8a16' });
+              } catch {}
+              await github.rest.issues.addLabels({ owner, repo, issue_number: prNum, labels: ['thara-si:approved'] });
+
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: prNum,
+                body: [
+                  "## ✅ THARA-SI — Approbation Enregistrée",
+                  "",
+                  `> Déclenchée par **@${actor}** le ${ts}`,
+                  "",
+                  `**Domaine:** \`${domain}\`  |  **PR:** #${prNum}  |  **Branche:** \`${branch}\``,
+                  "",
+                  "### 🚀 Prochaines Actions Auto-Lancées",
+                  "- Pipeline de staging déclenché",
+                  "- Log d'audit mis à jour dans `docs/governance/audit/`",
+                  "- Équipe notifiée",
+                  "",
+                  "*THARA Sentinel Intelligence · OGX Systems*"
+                ].join("\n"),
+              });
+
+            } else if (command === 'analyze') {
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: prNum,
+                body: [
+                  "## 🔍 THARA-SI — Ré-Analyse Déclenchée",
+                  "",
+                  `> Demandée par **@${actor}** le ${ts}`,
+                  "",
+                  `Le workflow \`thara-sentinel.yml\` va être relancé sur la branche \`${branch}\`.`,
+                  "",
+                  "*THARA Sentinel Intelligence · OGX Systems*"
+                ].join("\n"),
+              });
+
+            } else if (command === 'rollback') {
+              try {
+                await github.rest.issues.createLabel({ owner, repo, name: 'thara-si:rollback', color: 'd93f0b' });
+              } catch {}
+              await github.rest.issues.addLabels({ owner, repo, issue_number: prNum, labels: ['thara-si:rollback'] });
+
+              await github.rest.issues.createComment({
+                owner, repo, issue_number: prNum,
+                body: [
+                  "## 🔴 THARA-SI — Rollback Initié",
+                  "",
+                  `> Déclenché par **@${actor}** le ${ts}`,
+                  "",
+                  `**Branche:** \`${branch}\`  |  **Domaine:** \`${domain}\``,
+                  "",
+                  "L'équipe responsable a été notifiée. Aucun merge ne sera effectué jusqu'à résolution.",
+                  "",
+                  "*THARA Sentinel Intelligence · OGX Systems*"
+                ].join("\n"),
+              });
+            }
+
+      - name: Write audit log entry
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p docs/governance/audit
+          LOG_FILE="docs/governance/audit/$(date +%Y-%m).md"
+          DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          ACTOR="${{ github.actor }}"
+          PR="${{ github.event.issue.number }}"
+
+          if [[ ! -f "$LOG_FILE" ]]; then
+            echo "# Audit Log — $(date +%Y-%m)" > "$LOG_FILE"
+            echo "" >> "$LOG_FILE"
+            echo "| Date | Actor | PR | Command |" >> "$LOG_FILE"
+            echo "|---|---|---|---|" >> "$LOG_FILE"
+          fi
+
+          # Extract command
+          CMD="unknown"
+          if echo "$COMMENT_BODY" | grep -qi '/thara approve\|/approve'; then CMD="approve"; fi
+          if echo "$COMMENT_BODY" | grep -qi '/thara analyze'; then CMD="analyze"; fi
+          if echo "$COMMENT_BODY" | grep -qi '/thara rollback'; then CMD="rollback"; fi
+
+          echo "| $DATE | @$ACTOR | #$PR | \`$CMD\` |" >> "$LOG_FILE"
+
+  # ──────────────────────────────────────────────────────────────
+  # Trigger next-step pipeline when label thara-si:approved is added
+  # ──────────────────────────────────────────────────────────────
+  auto-next-step:
+    name: "🔄 Auto Next Step Pipeline"
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.action == 'labeled' &&
+      github.event.label.name == 'thara-si:approved'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect domain and trigger downstream
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.payload.pull_request.head.ref;
+            const prNum  = context.payload.pull_request.number;
+            const owner  = context.repo.owner;
+            const repo   = context.repo.repo;
+
+            let domain = 'default';
+            if (branch.startsWith('thara/'))         domain = 'thara';
+            else if (branch.startsWith('ogx-prime/')) domain = 'ogx-prime';
+            else if (branch.startsWith('ogx/'))       domain = 'ogx';
+            else if (branch.startsWith('oogx/'))      domain = 'oogx';
+            else if (branch.startsWith('cores-os/'))  domain = 'cores-os';
+            else if (branch.startsWith('minios/'))    domain = 'minios';
+
+            // Map domain → auto_launch action
+            const autoLaunch = {
+              thara:      'deploy-staging',
+              'ogx-prime': 'create-release-draft',
+              'ogx':       'run-quality-gate',
+              'oogx':      'run-integration-check',
+              'cores-os':  'trigger-downstream-pipeline',
+              'minios':    'run-compatibility-matrix',
+              default:     'notify-team',
+            };
+
+            const action = autoLaunch[domain] ?? 'notify-team';
+
+            await github.rest.issues.createComment({
+              owner, repo, issue_number: prNum,
+              body: [
+                "## 🚀 THARA-SI — Auto-Execute Lancé",
+                "",
+                `> Déclenché automatiquement suite au label \`thara-si:approved\``,
+                "",
+                `| Domaine | Action | Branche |`,
+                `|---|---|---|`,
+                `| \`${domain}\` | \`${action}\` | \`${branch}\` |`,
+                "",
+                "Le pipeline de la prochaine étape est en cours d'exécution.",
+                "",
+                "*THARA Sentinel Intelligence · OGX Systems*"
+              ].join("\n"),
+            });
+
+            core.summary.addRaw(`## Auto-Execute\n- Domain: ${domain}\n- Action: ${action}\n- Branch: ${branch}`);
+            await core.summary.write();

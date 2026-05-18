@@ -1,0 +1,28 @@
+# CODEOWNERS — OGX Systems
+# Each path maps to the team(s) responsible for review and approval.
+# See docs/governance/branch-protection.md for full governance context.
+
+# Global fallback — repo admins review everything not matched below
+*                       @DudeStunna1
+
+# THARA brand domain
+/thara/                 @DudeStunna1 @THARA-leads
+
+# OGX Prime — flagship, CEO-track
+/ogx-prime/             @DudeStunna1 @OGX-prime-core
+
+# OGX standard
+/ogx/                   @DudeStunna1 @OGX-prime-core
+
+# OOGX — extended OGX layer
+/oogx/                  @DudeStunna1 @OGX-prime-core
+
+# Cores-OS — infrastructure
+/cores-os/              @DudeStunna1 @infra-team
+
+# MiniOS
+/minios/                @DudeStunna1 @minios-team
+
+# Governance docs — admins only
+/.github/               @DudeStunna1
+/docs/governance/       @DudeStunna1
