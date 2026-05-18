@@ -1,0 +1,148 @@
+# THARA Sentinel Intelligence — Decision Matrix
+# Each brand domain maps to its required checks, approval rules, max delay, and auto-launch procedure.
+
+version: "1.0"
+
+domains:
+  thara:
+    pattern: "thara/**"
+    label: "domain:thara"
+    description: "THARA brand core — highest confidentiality and quality bar"
+    approvals:
+      minimum: 2
+      required_reviewers:
+        - "@THARA-leads"
+    required_checks:
+      - build
+      - test
+      - quality
+      - secret-scan
+      - e2e
+    max_delay_hours: 48
+    auto_launch:
+      on_approve: deploy-staging
+      on_merge: notify-thara-leads
+    risk_level: critical
+
+  ogx-prime:
+    pattern: "ogx-prime/**"
+    label: "domain:ogx-prime"
+    description: "OGX Prime — flagship, CEO-track review required"
+    approvals:
+      minimum: 2
+      required_reviewers:
+        - "@OGX-prime-core"
+    required_checks:
+      - build
+      - test
+      - quality
+      - performance-benchmark
+      - dependency-review
+    max_delay_hours: 24
+    auto_launch:
+      on_approve: run-performance-benchmark
+      on_merge: create-release-draft
+    risk_level: critical
+
+  ogx:
+    pattern: "ogx/**"
+    label: "domain:ogx"
+    description: "OGX standard — quality gate mandatory"
+    approvals:
+      minimum: 1
+      required_reviewers:
+        - "@OGX-prime-core"
+    required_checks:
+      - build
+      - test
+      - quality
+    max_delay_hours: 72
+    auto_launch:
+      on_approve: run-quality-gate
+      on_merge: notify-team
+    risk_level: standard
+
+  oogx:
+    pattern: "oogx/**"
+    label: "domain:oogx"
+    description: "OOGX — extended OGX operations layer"
+    approvals:
+      minimum: 1
+      required_reviewers:
+        - "@OGX-prime-core"
+    required_checks:
+      - build
+      - test
+    max_delay_hours: 72
+    auto_launch:
+      on_approve: run-integration-check
+      on_merge: notify-team
+    risk_level: standard
+
+  cores-os:
+    pattern: "cores-os/**"
+    label: "domain:cores-os"
+    description: "Cores-OS — infrastructure layer, hardening scan required"
+    approvals:
+      minimum: 2
+      required_reviewers:
+        - "@infra-team"
+    required_checks:
+      - build
+      - test
+      - hardening-scan
+      - dependency-review
+      - secret-scan
+    max_delay_hours: 24
+    auto_launch:
+      on_approve: run-infra-review
+      on_merge: trigger-downstream-pipeline
+    risk_level: critical
+
+  minios:
+    pattern: "minios/**"
+    label: "domain:minios"
+    description: "MiniOS — lightweight, compatibility matrix check"
+    approvals:
+      minimum: 1
+      required_reviewers:
+        - "@minios-team"
+    required_checks:
+      - build
+      - compatibility-matrix
+    max_delay_hours: 96
+    auto_launch:
+      on_approve: run-compatibility-matrix
+      on_merge: notify-team
+    risk_level: low
+
+  default:
+    pattern: "**"
+    label: "domain:general"
+    description: "General changes not matching a specific brand domain"
+    approvals:
+      minimum: 1
+      required_reviewers: []
+    required_checks:
+      - build
+      - lint
+    max_delay_hours: 120
+    auto_launch:
+      on_approve: null
+      on_merge: notify-team
+    risk_level: low
+
+# Risk level definitions
+risk_levels:
+  critical:
+    merge_queue: true
+    signed_commits: true
+    linear_history: true
+  standard:
+    merge_queue: false
+    signed_commits: false
+    linear_history: true
+  low:
+    merge_queue: false
+    signed_commits: false
+    linear_history: false
