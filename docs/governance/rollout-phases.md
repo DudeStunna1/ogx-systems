@@ -4,7 +4,7 @@
 
 ---
 
-## Phase 1 — Gouvernance ✅
+## Phase 1 — Governance ✅
 
 **Status:** Complete  
 **Target:** Solid governance foundation with zero ambiguity on rules
