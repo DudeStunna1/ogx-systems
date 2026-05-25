@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-25T00:00:00.000Z",
+  "systems": [
+    {
+      "id": "core-runtime",
+      "name": "SYSTEMS.OS Core Runtime",
+      "role": "runtime",
+      "enabled": true
+    },
+    {
+      "id": "workflow-orchestrator",
+      "name": "Workflow Orchestrator",
+      "role": "orchestration",
+      "enabled": true
+    },
+    {
+      "id": "system-registry",
+      "name": "System Registry",
+      "role": "registry",
+      "enabled": true
+    }
+  ]
+}

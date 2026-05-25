@@ -1,0 +1,55 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Node syntax check
+        run: |
+          node --check worker.js
+          node --check services/system-registry.js
+          node --check services/workflow-registry.js
+          node --check services/health-runtime.js
+
+      - name: Run JSON validation script when available
+        run: |
+          if node -e "const p=require('./package.json'); process.exit(p.scripts && p.scripts['validate:json'] ? 0 : 1)"; then
+            npm run validate:json
+          else
+            echo "validate:json script not found; skipping"
+          fi
+
+      - name: Run YAML validation script when available
+        run: |
+          if node -e "const p=require('./package.json'); process.exit(p.scripts && p.scripts['validate:yaml'] ? 0 : 1)"; then
+            npm run validate:yaml
+          else
+            echo "validate:yaml script not found; skipping"
+          fi
+
+      - name: Run tests if configured
+        run: |
+          if node -e "const p=require('./package.json'); process.exit(p.scripts && p.scripts.test ? 0 : 1)"; then
+            npm test
+          else
+            echo "No test script found; skipping"
+          fi
