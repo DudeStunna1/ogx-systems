@@ -1,0 +1,11 @@
+name = "ogx-systems"
+main = "worker.js"
+compatibility_date = "2026-05-25"
+
+[[kv_namespaces]]
+binding = "OGX_SYSTEMS_STATE"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[[queues.producers]]
+binding = "OGX_SYSTEMS_QUEUE"
+queue = "ogx-systems-queue"
