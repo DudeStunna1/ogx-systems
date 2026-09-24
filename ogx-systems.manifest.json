@@ -1,0 +1,15 @@
+{
+  "domain_ref": "OGX_SYSTEMS",
+  "domain_name": "OGX Systems",
+  "intended_custom_domain": "ogxsystems.com",
+  "application_surface": "STATIC_PUBLIC_SYSTEMS_SURFACE_R0",
+  "semantic_root": false,
+  "authority_owner": false,
+  "runtime_owner": false,
+  "repository_state": "IMPLEMENTED",
+  "deployment_state": "NOT_VERIFIED",
+  "dns_state": "NOT_VERIFIED",
+  "runtime_health_state": "NOT_VERIFIED",
+  "qualification_state": "NOT_QUALIFIED",
+  "first_broken_link": "PUBLIC_DEPLOYMENT_AND_DOMAIN_READBACK_NOT_VERIFIED"
+}
