@@ -1,0 +1,334 @@
+version: "0.1.0"
+status: PROPOSED
+canonical: false
+roadmap_ref: OGX_FLEET_INFRASTRUCTURE_ROADMAP_R0
+
+objective: >
+  Equip the nine-repository OGX fleet with governed truth, contracts, authority,
+  security, production, operations, distribution, publication, observability,
+  recovery, qualification, currentness, federation, and capitalization infrastructure.
+
+phases:
+  - id: P0
+    name: REPOSITORY_FOUNDATION_AND_PROTECTION
+    priority: CRITICAL
+    outcomes:
+      - repository visibility policy enforced
+      - branch/ruleset protection defined
+      - local/remote workspace state observable
+      - repository access passports current
+      - default branch mutation governed
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - ALL
+
+  - id: P1
+    name: DOMAIN_TRUTH_AND_BOUNDARIES
+    priority: CRITICAL
+    outcomes:
+      - ogx-domain.yaml per domain
+      - domain owner map
+      - domain boundary contract
+      - currentness record
+      - data ownership map
+      - explicit non-ownership declarations
+    primary_repositories:
+      - DudeStunna1/ogx-systems
+      - DudeStunna1/ogx-studios
+      - DudeStunna1/ogx-academy
+      - DudeStunna1/ogx-global
+      - DudeStunna1/ogx-vault
+      - DudeStunna1/ogx-shop
+      - DudeStunna1/ogx-website
+      - DudeStunna1/ogxglobalhorizon
+
+  - id: P2
+    name: CONTRACTS_AND_FEDERATION
+    priority: CRITICAL
+    outcomes:
+      - API contract registry
+      - event contract registry
+      - cross-domain contracts
+      - federation relationship registry
+      - public surface registry
+      - DNS/subdomain registry
+      - route registry
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - DudeStunna1/ogxglobalhorizon
+      - ALL_DOMAIN_REPOSITORIES
+
+  - id: P3
+    name: AUTHORITY_AND_EXECUTION_CONTROL
+    priority: CRITICAL
+    outcomes:
+      - authority binding schema
+      - authorization record
+      - effect ceiling
+      - execution binding
+      - four-eyes gate for critical effects
+      - human escalation contract
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - DudeStunna1/ogx-systems
+      - DudeStunna1/ogx-vault
+
+  - id: P4
+    name: CAPABILITY_PROVIDER_RUNTIME
+    priority: HIGH
+    outcomes:
+      - capability registry
+      - port/provider/adapter model
+      - provider passports
+      - runtime profiles
+      - runtime passports
+      - environment passports
+    primary_repositories:
+      - DudeStunna1/ogx-systems
+      - ALL_DOMAIN_REPOSITORIES
+
+  - id: P5
+    name: PRODUCTION_BUILD_AND_RELEASE
+    priority: HIGH
+    outcomes:
+      - build manifests
+      - release passports
+      - deployment passports
+      - artifact integrity records
+      - reproducible build evidence
+      - preview environments
+      - deployment gates
+    primary_repositories:
+      - DudeStunna1/ogx-systems
+      - DudeStunna1/ogx-website
+      - DudeStunna1/ogx-shop
+      - DudeStunna1/ogxglobalhorizon
+      - ALL_DEPLOYABLE_REPOSITORIES
+
+  - id: P6
+    name: OPERATIONS_AND_EFFECT_LEDGER
+    priority: HIGH
+    outcomes:
+      - effect intent
+      - effect attempt
+      - provider receipt
+      - effect observation
+      - reconciliation record
+      - retry decision
+      - operations runbooks
+      - health/readiness contracts
+    primary_repositories:
+      - DudeStunna1/ogx-systems
+      - DudeStunna1/OGX-PRIME
+
+  - id: P7
+    name: DISTRIBUTION_AND_PUBLICATION
+    priority: HIGH
+    outcomes:
+      - publication contract
+      - distribution profile
+      - channel profile
+      - release surface binding
+      - CDN/edge route binding
+      - content publication evidence
+      - rollback/unpublish path
+    primary_repositories:
+      - DudeStunna1/ogxglobalhorizon
+      - DudeStunna1/ogx-website
+      - DudeStunna1/ogx-shop
+      - DudeStunna1/ogx-studios
+      - DudeStunna1/ogx-academy
+
+  - id: P8
+    name: OBSERVATION_EVIDENCE_CURRENTNESS
+    priority: HIGH
+    outcomes:
+      - observation record
+      - evidence record
+      - evidence bundle
+      - evidence lineage
+      - currentness record
+      - system mirror projections
+      - first broken link radar
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - DudeStunna1/ogx-systems
+      - ALL
+
+  - id: P9
+    name: RECOVERY_AND_RESILIENCE
+    priority: HIGH
+    outcomes:
+      - recovery plans
+      - rollback contracts
+      - restore records
+      - reconciliation workflows
+      - zero residual guard
+      - backup passports
+      - restore drills
+    primary_repositories:
+      - DudeStunna1/ogx-systems
+      - DudeStunna1/ogx-vault
+      - ALL_STATEFUL_REPOSITORIES
+
+  - id: P10
+    name: QUALIFICATION_AND_DECAY
+    priority: HIGH
+    outcomes:
+      - qualification passport
+      - assembly qualification
+      - runtime qualification
+      - provider qualification
+      - recovery qualification
+      - qualification decay engine
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - DudeStunna1/ogx-systems
+      - ALL
+
+  - id: P11
+    name: DOMAIN_PRODUCTIZATION
+    priority: MEDIUM
+    outcomes:
+      - Systems SystemGenome/SystemPassport/SystemFoundry
+      - Studios Creative Genome and rights lineage
+      - Academy learning/credential model
+      - Shop order/payment/entitlement model
+      - Global federation/region profiles
+      - Vault secret/key/rotation abstractions
+      - Horizon federation directory
+      - Website public experience surface
+    primary_repositories:
+      - ALL_DOMAIN_REPOSITORIES
+
+  - id: P12
+    name: CAPITALIZATION_AND_DECOMMISSIONING
+    priority: MEDIUM
+    outcomes:
+      - capitalization record
+      - reusable skill/processor extraction
+      - supersession records
+      - retirement passports
+      - decommissioning records
+      - residual-state verification
+    primary_repositories:
+      - DudeStunna1/OGX-PRIME
+      - DudeStunna1/ogx-systems
+      - ALL
+
+repository_focus:
+  DudeStunna1/OGX-PRIME:
+    role: GOVERNED_CONTROL_PLANE
+    first_builds:
+      - fleet atlas
+      - mission registry
+      - authority registry
+      - evidence/currentness fabric
+      - system mirror
+      - change impact graph
+
+  DudeStunna1/ogx-systems:
+    role: SYSTEMS_FACTORY_AND_RUNTIME_ENGINEERING
+    first_builds:
+      - salvage baseline
+      - SystemGenome
+      - SystemPassport
+      - capability registry
+      - provider/port/adapter model
+      - effect ledger
+      - recovery
+      - qualification
+      - workforce composition
+
+  DudeStunna1/ogx-studios:
+    role: CREATIVE_PRODUCTION_DOMAIN
+    first_builds:
+      - creative genome contracts
+      - production pipeline
+      - rights lineage
+      - publication/distribution contracts
+      - asset qualification
+
+  DudeStunna1/ogx-academy:
+    role: LEARNING_DOMAIN
+    first_builds:
+      - course/learning path profiles
+      - learning evidence
+      - assessment/credential contracts
+      - publication surfaces
+
+  DudeStunna1/ogx-global:
+    role: GLOBAL_FEDERATION_INFRASTRUCTURE
+    first_builds:
+      - region/jurisdiction profiles
+      - provider-region bindings
+      - federation nodes
+      - availability projections
+
+  DudeStunna1/ogx-vault:
+    role: SECURITY_AND_SECRET_MATERIAL_DOMAIN
+    first_builds:
+      - secret binding refs
+      - key profiles
+      - rotation records
+      - access observations
+      - revocation records
+      - recovery evidence
+
+  DudeStunna1/ogx-shop:
+    role: COMMERCE_DELIVERY_DOMAIN
+    first_builds:
+      - product/order contracts
+      - payment observations
+      - entitlement records
+      - fulfillment/reconciliation
+      - public commerce surface
+
+  DudeStunna1/ogx-website:
+    role: PUBLIC_WEB_EXPERIENCE
+    first_builds:
+      - public surface manifest
+      - route registry
+      - publication pipeline
+      - security headers
+      - deployment passport
+
+  DudeStunna1/ogxglobalhorizon:
+    role: PUBLIC_FEDERATION_ENTRYPOINT
+    first_builds:
+      - federation directory
+      - subdomain registry
+      - route bindings
+      - public surface registry
+      - health projection
+      - cross-domain navigation
+
+execution_order:
+  - P0
+  - P1
+  - P2
+  - P3
+  - P4
+  - P5
+  - P6
+  - P7
+  - P8
+  - P9
+  - P10
+  - P11
+  - P12
+
+global_invariants:
+  - CONSTITUTION_NE_CURRENT_STATE
+  - REPOSITORY_NE_DOMAIN
+  - DOMAIN_NE_SUBDOMAIN
+  - PUBLIC_SURFACE_NE_PUBLIC_SOURCE
+  - CAPABILITY_NE_AUTHORITY
+  - DEPLOYED_NE_QUALIFIED
+  - PUBLISHED_NE_OBSERVED
+  - OBSERVED_NE_EVIDENCED
+  - EVIDENCED_NE_QUALIFIED
+  - BACKUP_PRESENT_NE_RECOVERY_PROVEN
+  - CROSS_DOMAIN_DATABASE_ACCESS_FORBIDDEN_BY_DEFAULT
+  - FEDERATION_NE_CENTRALIZATION
+  - BUILD_NE_AUTHORIZE_NE_DEPLOY_NE_OBSERVE_NE_QUALIFY

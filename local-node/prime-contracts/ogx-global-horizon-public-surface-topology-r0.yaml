@@ -1,0 +1,86 @@
+version: "0.1.0"
+status: PROPOSED
+canonical: false
+topology_ref: OGX_GLOBAL_HORIZON_PUBLIC_SURFACE_TOPOLOGY_R0
+
+principle:
+  statement: >
+    OGX GLOBAL HORIZON may serve as the public federation and navigation surface for
+    multiple OGX domains without becoming the semantic owner of those domains.
+
+distinctions:
+  - REPOSITORY_NE_DOMAIN
+  - DOMAIN_NE_SUBDOMAIN
+  - SUBDOMAIN_NE_SEMANTIC_OWNER
+  - PUBLIC_SURFACE_NE_SOURCE_VISIBILITY
+  - ROUTING_NE_OWNERSHIP
+  - FEDERATION_NE_CENTRALIZATION
+
+root_surface:
+  host: ogxglobalhorizon.com
+  candidate_role: PUBLIC_FEDERATION_ENTRYPOINT
+
+candidate_public_surfaces:
+  - host: www.ogxglobalhorizon.com
+    kind: ROOT_WEBSITE
+    candidate_repository_ref: DudeStunna1/ogx-website
+
+  - host: shop.ogxglobalhorizon.com
+    kind: PUBLIC_COMMERCE_SURFACE
+    candidate_repository_ref: DudeStunna1/ogx-shop
+
+  - host: academy.ogxglobalhorizon.com
+    kind: PUBLIC_LEARNING_SURFACE
+    candidate_repository_ref: DudeStunna1/ogx-academy
+    source_visibility: PRIVATE_ALLOWED
+
+  - host: studios.ogxglobalhorizon.com
+    kind: PUBLIC_CREATIVE_SURFACE
+    candidate_repository_ref: DudeStunna1/ogx-studios
+    source_visibility: PRIVATE_ALLOWED
+
+  - host: systems.ogxglobalhorizon.com
+    kind: PUBLIC_SYSTEMS_INFORMATION_SURFACE
+    candidate_repository_ref: DudeStunna1/ogx-systems
+    source_visibility: PRIVATE_ALLOWED
+    guard: NO_INTERNAL_CONTROL_PLANE_EXPOSURE
+
+  - host: global.ogxglobalhorizon.com
+    kind: PUBLIC_GLOBAL_FEDERATION_SURFACE
+    candidate_repository_ref: DudeStunna1/ogx-global
+    source_visibility: PRIVATE_ALLOWED
+
+  - host: vault.ogxglobalhorizon.com
+    kind: PUBLIC_VAULT_INFORMATION_SURFACE_ONLY
+    candidate_repository_ref: DudeStunna1/ogx-vault
+    source_visibility: PRIVATE
+    guard: NEVER_EXPOSE_SECRET_OR_CONTROL_ENDPOINTS
+
+other_supported_subsurface_kinds:
+  - SUBDOMAIN
+  - SUBPATH
+  - MICROFRONTEND
+  - PUBLIC_API_GATEWAY
+  - EDGE_WORKER_ROUTE
+  - CDN_ASSET_SURFACE
+  - DOCUMENTATION_SURFACE
+  - PORTAL
+  - APP
+  - WEBHOOK_INGRESS
+  - STATIC_SITE
+  - FEDERATED_NAVIGATION_SURFACE
+
+routing_examples:
+  - "/shop -> commerce surface"
+  - "/academy -> learning surface"
+  - "/studios -> creative surface"
+  - "/docs -> documentation surface"
+  - "/api/<domain> -> explicitly governed public API gateway"
+
+ownership_rule: >
+  OGX GLOBAL HORIZON may route to, compose, or present domain surfaces, but domain
+  semantics, state, authority, and contracts remain with their designated owners.
+
+security_rule: >
+  Private repositories may publish public artifacts and endpoints through governed
+  deployment pipelines. Public reachability never implies source visibility or control-plane exposure.

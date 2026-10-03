@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "component": {
+      "enum": [
+        "prime",
+        "systems",
+        "vault",
+        "global",
+        "studios",
+        "academy",
+        "shop",
+        "horizon"
+      ]
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^r-[a-f0-9]{64}$"
+    },
+    "manifest_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state": {
+      "enum": [
+        "TESTED",
+        "QUALIFIED"
+      ]
+    },
+    "scope": {
+      "const": "LOCAL_ARTIFACT_ONLY"
+    },
+    "origin": {
+      "enum": [
+        "VERIFIED_LOCAL_REPORT",
+        "SYNTHETIC_TEST_FIXTURE"
+      ]
+    },
+    "report_path": {
+      "type": "string"
+    },
+    "report_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "component",
+    "release_id",
+    "manifest_digest",
+    "state",
+    "scope",
+    "origin",
+    "report_path",
+    "report_digest"
+  ]
+}

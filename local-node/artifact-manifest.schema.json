@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "OGX_ARTIFACT_MANIFEST_R0"
+    },
+    "component": {
+      "enum": [
+        "prime",
+        "systems",
+        "vault",
+        "global",
+        "studios",
+        "academy",
+        "shop",
+        "horizon"
+      ]
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "files": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "component",
+    "source_commit",
+    "files"
+  ]
+}

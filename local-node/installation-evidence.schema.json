@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "OGX_INSTALLATION_EVIDENCE_R0"
+    },
+    "component": {
+      "enum": [
+        "prime",
+        "systems",
+        "vault",
+        "global",
+        "studios",
+        "academy",
+        "shop",
+        "horizon"
+      ]
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^r-[a-f0-9]{64}$"
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "manifest_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "transaction_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "environment": {
+      "enum": [
+        "CLOUD_TEST_ENVIRONMENT",
+        "ZBOOK_TARGET_OBSERVATION"
+      ]
+    },
+    "scope": {
+      "const": "LOCAL_ARTIFACT_RELEASE"
+    },
+    "runtime_implemented": {
+      "const": false
+    },
+    "qualification_state": {
+      "const": "UNTESTED"
+    },
+    "external_effect": {
+      "const": false
+    }
+  },
+  "required": [
+    "schema",
+    "component",
+    "release_id",
+    "source_commit",
+    "manifest_digest",
+    "node_id",
+    "transaction_id",
+    "environment",
+    "scope",
+    "runtime_implemented",
+    "qualification_state",
+    "external_effect"
+  ]
+}

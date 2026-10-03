@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema",
+    "result",
+    "read_only",
+    "ZBOOK_INSTALLED",
+    "ZBOOK_QUALIFIED",
+    "PROVIDER_MUTATION",
+    "observations",
+    "blockers"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "OGX_ZBOOK_PREFLIGHT_R0"
+    },
+    "result": {
+      "enum": [
+        "PASS",
+        "BLOCKED"
+      ]
+    },
+    "read_only": {
+      "const": true
+    },
+    "ZBOOK_INSTALLED": {
+      "const": false
+    },
+    "ZBOOK_QUALIFIED": {
+      "const": false
+    },
+    "PROVIDER_MUTATION": {
+      "const": false
+    },
+    "observations": {
+      "type": "object"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
