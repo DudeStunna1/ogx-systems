@@ -3,7 +3,7 @@ import argparse, hashlib, json, re, shutil, sys
 from pathlib import Path
 
 EFFECTS={"E0_NO_EXTERNAL_EFFECT","E1_REPOSITORY_ONLY","E2_PROVIDER_CONFIGURATION","E3_RUNTIME_STATE","E4_PRODUCTION_EFFECT"}
-FORBIDDEN=re.compile(r"(secret|password|token|api[_-]?key|credential)",re.I)
+FORBIDDEN_KEY=re.compile(r"^(secret|password|token|api[_-]?key|credential)(s)?$",re.I)
 
 def load(p):
     return json.loads(Path(p).read_text(encoding="utf-8"))
