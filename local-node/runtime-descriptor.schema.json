@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "component",
+    "runtime_class",
+    "runtime_implemented",
+    "network_binding",
+    "external_effect",
+    "contract_status",
+    "source_commit",
+    "revision"
+  ],
+  "properties": {
+    "component": {
+      "enum": [
+        "prime",
+        "systems",
+        "vault",
+        "global",
+        "studios",
+        "academy",
+        "shop",
+        "horizon"
+      ]
+    },
+    "runtime_class": {
+      "enum": [
+        "INSTALLABLE_BLUEPRINT",
+        "CONTRACT_ONLY"
+      ]
+    },
+    "runtime_implemented": {
+      "const": false
+    },
+    "network_binding": {
+      "const": null
+    },
+    "external_effect": {
+      "const": false
+    },
+    "contract_status": {
+      "const": "PROPOSED"
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "revision": {
+      "type": "string"
+    }
+  }
+}

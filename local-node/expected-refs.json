@@ -1,0 +1,42 @@
+[
+  {
+    "repository": "DudeStunna1/OGX-PRIME",
+    "branch": "main",
+    "sha": "ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4"
+  },
+  {
+    "repository": "DudeStunna1/ogx-systems",
+    "branch": "main",
+    "sha": "3f8dac37a940cb9a7615d0147dd90c87201e9495"
+  },
+  {
+    "repository": "DudeStunna1/ogx-vault",
+    "branch": "main",
+    "sha": "af27768ecc9bd8558642ab1324d57ecec292750a"
+  },
+  {
+    "repository": "DudeStunna1/ogx-global",
+    "branch": "main",
+    "sha": "220e5cd9c9d04e206749b1a476f8d8a4e05c337f"
+  },
+  {
+    "repository": "DudeStunna1/ogx-studios",
+    "branch": "main",
+    "sha": "b7d35b7185bfafbf3f6027c8409d2fa8ffa8aab5"
+  },
+  {
+    "repository": "DudeStunna1/ogx-academy",
+    "branch": "main",
+    "sha": "994aa2aff4b05b313ce4ee81717fbf469b2babcb"
+  },
+  {
+    "repository": "DudeStunna1/ogx-shop",
+    "branch": "main",
+    "sha": "751a413cbcc82daf5d4c411084513a4a692ea3dc"
+  },
+  {
+    "repository": "DudeStunna1/ogxglobalhorizon",
+    "branch": "main",
+    "sha": "bea365952cade89f1ce0a174cfe5a81d0dc3b89e"
+  }
+]
