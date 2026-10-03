@@ -1,0 +1,22 @@
+{
+  "system_ref": "STUDIOS.OS",
+  "domain_ref": "OGX_STUDIOS",
+  "capabilities": [
+    "CREATIVE_PRODUCTION",
+    "MEDIA_PIPELINES",
+    "RIGHTS_LINEAGE",
+    "PUBLICATION_WORKFLOWS"
+  ],
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R1"
+  ],
+  "runtime_profiles": [
+    "DEBIAN_13_X86_64",
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ]
+}
+

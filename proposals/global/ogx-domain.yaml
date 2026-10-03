@@ -1,0 +1,94 @@
+{
+  "authority": {
+    "default_effect": "E0_LOCAL_ONLY",
+    "governance_source": "DudeStunna1/OGX-PRIME",
+    "state": "NONE"
+  },
+  "canonical": false,
+  "evidence_refs": [
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+    "DudeStunna1/ogx-global@220e5cd9c9d04e206749b1a476f8d8a4e05c337f:README.md"
+  ],
+  "exclusions": {
+    "status": "PROPOSED_GOVERNANCE_BOUNDARY",
+    "values": [
+      "HUMAN_PRINCIPAL_AUTHORITY",
+      "OGX_PRIME_GOVERNANCE",
+      "OTHER_DOMAIN_STATE_OWNERSHIP",
+      "PROVIDER_MUTATION",
+      "PUBLIC_SERVICE_ACTIVATION"
+    ]
+  },
+  "fqdn": {
+    "dns_ownership": "UNRESOLVED",
+    "dns_state": "NOT_OBSERVED",
+    "source": "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+    "status": "PROPOSED_PUBLIC_SURFACE",
+    "value": "global.ogxglobalhorizon.com"
+  },
+  "human_owner": {
+    "status": "UNRESOLVED",
+    "value": null
+  },
+  "identity": {
+    "domain_ref": "OGX_GLOBAL",
+    "status": "PROPOSED_USER_REQUESTED",
+    "system_ref": "GLOBAL.OS"
+  },
+  "implementation_state": "NO_IMPLEMENTATION_ON_DOMAIN_MAIN_OBSERVED",
+  "other_observed_host_candidates": [
+    {
+      "source": "DudeStunna1/ogx-systems@5d69b5d5c10c6dde8c153dd6ba09215ab1bd866e:local-node/fleet.json",
+      "status": "CANDIDATE_NOT_SELECTED",
+      "value": "ogxglobal.com"
+    }
+  ],
+  "repository": {
+    "main_ref": "220e5cd9c9d04e206749b1a476f8d8a4e05c337f",
+    "status": "OBSERVED_EXISTING",
+    "value": "DudeStunna1/ogx-global"
+  },
+  "responsibilities": [
+    {
+      "capability": "JURISDICTION_MODELING",
+      "derivation": "MODELING_SCOPE_FROM_DOMAIN_PURPOSE; NOT_PROOF_OF_IMPLEMENTED_CAPABILITY",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/ogx-global@220e5cd9c9d04e206749b1a476f8d8a4e05c337f:README.md"
+      ],
+      "status": "PROPOSED"
+    },
+    {
+      "capability": "PROVIDER_RELATIONSHIP_MODELING",
+      "derivation": "MODELING_SCOPE_FROM_DOMAIN_PURPOSE; NOT_PROOF_OF_IMPLEMENTED_CAPABILITY",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/ogx-global@220e5cd9c9d04e206749b1a476f8d8a4e05c337f:README.md"
+      ],
+      "status": "PROPOSED"
+    },
+    {
+      "capability": "REGION_MODELING",
+      "derivation": "MODELING_SCOPE_FROM_DOMAIN_PURPOSE; NOT_PROOF_OF_IMPLEMENTED_CAPABILITY",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/ogx-global@220e5cd9c9d04e206749b1a476f8d8a4e05c337f:README.md"
+      ],
+      "status": "PROPOSED"
+    }
+  ],
+  "semantic_owner": {
+    "status": "PROPOSED",
+    "value": "OGX_GLOBAL"
+  },
+  "status": "PROPOSED",
+  "unresolved": [
+    "canonical_adoption",
+    "human_owner_binding",
+    "DNS_ownership_and_live_state",
+    "runtime_qualification",
+    "cross_domain_contract_adoption"
+  ],
+  "version": "0.2.0"
+}

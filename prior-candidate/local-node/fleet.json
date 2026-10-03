@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1.0",
+  "node": "OGX_LOCAL_FOUNDRY_NODE",
+  "default_effect": "E0_LOCAL_ONLY",
+  "control_plane": "OGX-PRIME",
+  "factory": "ogx-systems",
+  "domains": [
+    {
+      "product": "SYSTEMS.OS",
+      "repository": "ogx-systems",
+      "fqdn": "ogxsystems.com"
+    },
+    {
+      "product": "VAULT.OS",
+      "repository": "ogx-vault",
+      "fqdn": "ogxvault.com"
+    },
+    {
+      "product": "GLOBAL.OS",
+      "repository": "ogx-global",
+      "fqdn": "ogxglobal.com"
+    },
+    {
+      "product": "STUDIOS.OS",
+      "repository": "ogx-studios",
+      "fqdn": "ogxstudios.com"
+    },
+    {
+      "product": "ACADEMY.OS",
+      "repository": "ogx-academy",
+      "fqdn": "ogxacademy.com"
+    },
+    {
+      "product": "SHOP.OS",
+      "repository": "ogx-shop",
+      "fqdn": "ogxshop.com"
+    },
+    {
+      "product": "HORIZON.OS",
+      "repository": "ogxglobalhorizon",
+      "fqdn": "ogxglobalhorizon.com"
+    }
+  ]
+}
+

@@ -1,0 +1,30 @@
+{
+  "capabilities": [
+    "CAPABILITY_REGISTRY",
+    "QUALIFICATION_ENGINEERING",
+    "RECOVERY_ENGINEERING",
+    "RUNTIME_ENGINEERING",
+    "SYSTEM_BLUEPRINT_GENERATION",
+    "SYSTEM_ENGINEERING"
+  ],
+  "contract_status": "PROPOSED",
+  "domain_ref": "OGX_SYSTEMS",
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ],
+  "evidence_refs": [
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+    "DudeStunna1/ogx-systems@3f8dac37a940cb9a7615d0147dd90c87201e9495:README.md"
+  ],
+  "fqdn": "systems.ogxglobalhorizon.com",
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R2_PROPOSAL"
+  ],
+  "repository": "DudeStunna1/ogx-systems",
+  "runtime_profiles": [
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "system_ref": "SYSTEMS.OS"
+}

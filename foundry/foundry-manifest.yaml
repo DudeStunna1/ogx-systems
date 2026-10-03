@@ -1,0 +1,12 @@
+version: "0.2.0"
+status: PROPOSED
+canonical: false
+foundry_ref: OGX_SYSTEM_FOUNDRY_R2_PROPOSAL
+qualification_scope: CLOUD_BUILD_CONTRACT_ONLY
+default_effect: E0_LOCAL_ONLY
+ZBOOK_INSTALLED: false
+activation: false
+input_contracts:
+  - contracts/system-genome.schema.json
+  - contracts/system-passport.schema.json
+output_scope: GENERATED_BLUEPRINT_ONLY

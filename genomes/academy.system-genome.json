@@ -1,0 +1,27 @@
+{
+  "capabilities": [
+    "KNOWLEDGE_MODELING",
+    "LEARNING_PATHWAYS",
+    "QUALIFICATION_PATHWAYS"
+  ],
+  "contract_status": "PROPOSED",
+  "domain_ref": "OGX_ACADEMY",
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ],
+  "evidence_refs": [
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+    "DudeStunna1/ogx-academy@994aa2aff4b05b313ce4ee81717fbf469b2babcb:README.md"
+  ],
+  "fqdn": "academy.ogxglobalhorizon.com",
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R2_PROPOSAL"
+  ],
+  "repository": "DudeStunna1/ogx-academy",
+  "runtime_profiles": [
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "system_ref": "ACADEMY.OS"
+}

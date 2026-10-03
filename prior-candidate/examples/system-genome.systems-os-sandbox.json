@@ -1,0 +1,17 @@
+{
+  "system_ref": "SYSTEMS_OS_SANDBOX_R1",
+  "domain_ref": "OGX_SYSTEMS",
+  "capabilities": [
+    "SYSTEM_BLUEPRINT_GENERATION"
+  ],
+  "interfaces": [
+    "FILESYSTEM_SANDBOX_ONLY"
+  ],
+  "runtime_profiles": [
+    "DEBIAN_13_X86_64"
+  ],
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ]
+}
+

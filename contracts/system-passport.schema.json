@@ -1,0 +1,67 @@
+{
+  "$id": "urn:ogx:generated-passport:r2-proposed",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "activated": {
+      "const": false
+    },
+    "artifact_state": {
+      "const": "GENERATED"
+    },
+    "authority_state": {
+      "const": "NONE"
+    },
+    "effect_ceiling": {
+      "const": "E0_LOCAL_ONLY"
+    },
+    "evidence_refs": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "external_effect": {
+      "const": false
+    },
+    "genome_ref": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "installation_evidence_refs": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "qualification_state": {
+      "const": "UNTESTED"
+    },
+    "recovery_state": {
+      "const": "UNPROVEN"
+    },
+    "schema": {
+      "const": "OGX_SYSTEM_PASSPORT_R2_PROPOSED"
+    },
+    "system_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "version": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "system_ref",
+    "genome_ref",
+    "version",
+    "schema",
+    "artifact_state",
+    "qualification_state",
+    "authority_state",
+    "recovery_state",
+    "effect_ceiling",
+    "external_effect",
+    "activated",
+    "evidence_refs",
+    "installation_evidence_refs"
+  ],
+  "type": "object"
+}

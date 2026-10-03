@@ -1,0 +1,264 @@
+{
+  "$id": "urn:ogx:system-genome:r2-proposed",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "SYSTEMS.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_SYSTEMS"
+          },
+          "fqdn": {
+            "const": "systems.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-systems"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "VAULT.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_VAULT"
+          },
+          "fqdn": {
+            "const": "vault.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-vault"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "GLOBAL.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_GLOBAL"
+          },
+          "fqdn": {
+            "const": "global.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-global"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "STUDIOS.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_STUDIOS"
+          },
+          "fqdn": {
+            "const": "studios.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-studios"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "ACADEMY.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_ACADEMY"
+          },
+          "fqdn": {
+            "const": "academy.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-academy"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "SHOP.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_SHOP"
+          },
+          "fqdn": {
+            "const": "shop.ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogx-shop"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "system_ref": {
+            "const": "HORIZON.OS"
+          }
+        },
+        "required": [
+          "system_ref"
+        ]
+      },
+      "then": {
+        "properties": {
+          "domain_ref": {
+            "const": "OGX_GLOBAL_HORIZON"
+          },
+          "fqdn": {
+            "const": "ogxglobalhorizon.com"
+          },
+          "repository": {
+            "const": "DudeStunna1/ogxglobalhorizon"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "capabilities": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "contract_status": {
+      "const": "PROPOSED"
+    },
+    "domain_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "effect_classes": {
+      "const": [
+        "E0_NO_EXTERNAL_EFFECT"
+      ]
+    },
+    "evidence_refs": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "fqdn": {
+      "pattern": "^[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9]+(?:[a-z0-9-]*[a-z0-9])?)+$",
+      "type": "string"
+    },
+    "interfaces": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "repository": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "runtime_profiles": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "system_ref": {
+      "enum": [
+        "SYSTEMS.OS",
+        "VAULT.OS",
+        "GLOBAL.OS",
+        "STUDIOS.OS",
+        "ACADEMY.OS",
+        "SHOP.OS",
+        "HORIZON.OS"
+      ]
+    }
+  },
+  "required": [
+    "system_ref",
+    "domain_ref",
+    "repository",
+    "fqdn",
+    "capabilities",
+    "interfaces",
+    "runtime_profiles",
+    "evidence_refs",
+    "effect_classes",
+    "contract_status"
+  ],
+  "type": "object"
+}

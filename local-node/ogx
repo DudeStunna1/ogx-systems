@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+import json, sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from release_store import status
+if len(sys.argv)!=3 or sys.argv[1]!='status':
+    print('usage: ogx status <cloud-fixture-root>',file=sys.stderr)
+    raise SystemExit(2)
+print(json.dumps(status(sys.argv[2]),sort_keys=True))
