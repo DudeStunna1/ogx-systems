@@ -1,0 +1,21 @@
+{
+  "system_ref": "VAULT.OS",
+  "domain_ref": "OGX_VAULT",
+  "capabilities": [
+    "SECRETS_MODELING",
+    "KEY_REFERENCE_MODELING",
+    "CREDENTIAL_BOUNDARY_MODELING",
+    "PROTECTED_ARTIFACT_MODELING"
+  ],
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R1"
+  ],
+  "runtime_profiles": [
+    "DEBIAN_13_X86_64",
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ]
+}
