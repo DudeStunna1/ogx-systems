@@ -1,22 +1,12 @@
-# OGX SYSTEMS — SYSTEMS.OS R0
+# SYSTEMS Foundry R2 repair proposal
 
-SYSTEMS.OS is the system-factory and runtime-engineering domain governed by OGX PRIME.
+Cloud build/contract qualification passes in attempt 03. Read the reconciled fleet
+report and evidence; this is not canonical adoption or ZBook installation.
+Schemas, genomes and domains remain PROPOSED. Generated passports remain
+GENERATED / UNTESTED / NONE / external_effect=false. No domain runtime is installed.
+Legacy installers return STOP. release_store.py is cloud-fixture storage only.
+See ../zbook-preflight.sh for the read-only target handoff.
 
-R0 establishes:
-- `SystemGenome` contract
-- `SystemPassport` contract
-- `SystemFoundry` manifest
-- Debian 13 local installer
-- fail-closed E0 baseline
-
-R0 does **not** imply deployment, qualification, production activation, provider authority, or autonomous external effects.
-
-## Debian 13
-
-```bash
-git clone https://github.com/DudeStunna1/ogx-systems.git
-cd ogx-systems
-git switch fidelis/systems-os-r0-foundry
-bash debian/install-systemos-r0.sh
-~/.local/bin/ogx-systems verify
-```
+Run cloud tests with a Python interpreter providing attrs, using ../vendor for
+official jsonschema 4.17.3 and pyrsistent 0.19.3 sources. The Work toolchain versions
+and upstream refs are in ../evidence/toolchain.json. No ZBook dependencies installed.

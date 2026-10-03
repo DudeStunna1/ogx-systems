@@ -1,21 +1,28 @@
 {
-  "system_ref": "VAULT.OS",
-  "domain_ref": "OGX_VAULT",
   "capabilities": [
-    "SECRETS_MODELING",
-    "KEY_REFERENCE_MODELING",
     "CREDENTIAL_BOUNDARY_MODELING",
-    "PROTECTED_ARTIFACT_MODELING"
+    "KEY_REFERENCE_MODELING",
+    "PROTECTED_ARTIFACT_MODELING",
+    "SECRETS_MODELING"
   ],
-  "interfaces": [
-    "OGX_PRIME_GOVERNED_CONTRACT",
-    "SYSTEM_FOUNDRY_R1"
-  ],
-  "runtime_profiles": [
-    "DEBIAN_13_X86_64",
-    "REPOSITORY_BLUEPRINT"
-  ],
+  "contract_status": "PROPOSED",
+  "domain_ref": "OGX_VAULT",
   "effect_classes": [
     "E0_NO_EXTERNAL_EFFECT"
-  ]
+  ],
+  "evidence_refs": [
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+    "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+    "DudeStunna1/ogx-vault@af27768ecc9bd8558642ab1324d57ecec292750a:README.md"
+  ],
+  "fqdn": "vault.ogxglobalhorizon.com",
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R2_PROPOSAL"
+  ],
+  "repository": "DudeStunna1/ogx-vault",
+  "runtime_profiles": [
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "system_ref": "VAULT.OS"
 }

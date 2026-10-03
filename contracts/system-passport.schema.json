@@ -1,56 +1,67 @@
 {
+  "$id": "urn:ogx:generated-passport:r2-proposed",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ogx.systems.system-passport.r0",
-  "title": "OGX SystemPassport R0",
-  "type": "object",
   "additionalProperties": false,
+  "properties": {
+    "activated": {
+      "const": false
+    },
+    "artifact_state": {
+      "const": "GENERATED"
+    },
+    "authority_state": {
+      "const": "NONE"
+    },
+    "effect_ceiling": {
+      "const": "E0_LOCAL_ONLY"
+    },
+    "evidence_refs": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "external_effect": {
+      "const": false
+    },
+    "genome_ref": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "installation_evidence_refs": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "qualification_state": {
+      "const": "UNTESTED"
+    },
+    "recovery_state": {
+      "const": "UNPROVEN"
+    },
+    "schema": {
+      "const": "OGX_SYSTEM_PASSPORT_R2_PROPOSED"
+    },
+    "system_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "version": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
   "required": [
     "system_ref",
     "genome_ref",
     "version",
+    "schema",
+    "artifact_state",
     "qualification_state",
     "authority_state",
-    "recovery_state"
+    "recovery_state",
+    "effect_ceiling",
+    "external_effect",
+    "activated",
+    "evidence_refs",
+    "installation_evidence_refs"
   ],
-  "properties": {
-    "system_ref": {
-      "type": "string"
-    },
-    "genome_ref": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
-    },
-    "qualification_state": {
-      "enum": [
-        "UNTESTED",
-        "TESTED",
-        "QUALIFIED",
-        "REJECTED",
-        "EXPIRED"
-      ]
-    },
-    "authority_state": {
-      "enum": [
-        "NONE",
-        "BOUNDED",
-        "EXPIRED"
-      ]
-    },
-    "recovery_state": {
-      "enum": [
-        "UNPROVEN",
-        "DOCUMENTED",
-        "TESTED",
-        "QUALIFIED"
-      ]
-    },
-    "evidence_refs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    }
-  }
+  "type": "object"
 }

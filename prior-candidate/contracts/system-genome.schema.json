@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ogx.systems.system-genome.r0",
+  "title": "OGX SystemGenome R0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "system_ref",
+    "domain_ref",
+    "capabilities",
+    "interfaces",
+    "runtime_profiles",
+    "effect_classes"
+  ],
+  "properties": {
+    "system_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "runtime_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "effect_classes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "E0_NO_EXTERNAL_EFFECT",
+          "E1_REPOSITORY_ONLY",
+          "E2_PROVIDER_CONFIGURATION",
+          "E3_RUNTIME_STATE",
+          "E4_PRODUCTION_EFFECT"
+        ]
+      },
+      "uniqueItems": true
+    }
+  }
+}
+

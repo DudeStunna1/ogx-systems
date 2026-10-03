@@ -1,44 +1,134 @@
 {
-  "schema_version": "0.1.0",
-  "node": "OGX_LOCAL_FOUNDRY_NODE",
+  "canonical": false,
   "default_effect": "E0_LOCAL_ONLY",
-  "control_plane": "OGX-PRIME",
-  "factory": "ogx-systems",
   "domains": [
     {
-      "product": "SYSTEMS.OS",
-      "repository": "ogx-systems",
-      "fqdn": "ogxsystems.com"
+      "capabilities": [
+        "CAPABILITY_REGISTRY",
+        "QUALIFICATION_ENGINEERING",
+        "RECOVERY_ENGINEERING",
+        "RUNTIME_ENGINEERING",
+        "SYSTEM_BLUEPRINT_GENERATION",
+        "SYSTEM_ENGINEERING"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_SYSTEMS",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-systems@3f8dac37a940cb9a7615d0147dd90c87201e9495:README.md"
+      ],
+      "fqdn": "systems.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-systems",
+      "system_ref": "SYSTEMS.OS"
     },
     {
-      "product": "VAULT.OS",
-      "repository": "ogx-vault",
-      "fqdn": "ogxvault.com"
+      "capabilities": [
+        "CREDENTIAL_BOUNDARY_MODELING",
+        "KEY_REFERENCE_MODELING",
+        "PROTECTED_ARTIFACT_MODELING",
+        "SECRETS_MODELING"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_VAULT",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-vault@af27768ecc9bd8558642ab1324d57ecec292750a:README.md"
+      ],
+      "fqdn": "vault.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-vault",
+      "system_ref": "VAULT.OS"
     },
     {
-      "product": "GLOBAL.OS",
-      "repository": "ogx-global",
-      "fqdn": "ogxglobal.com"
+      "capabilities": [
+        "JURISDICTION_MODELING",
+        "PROVIDER_RELATIONSHIP_MODELING",
+        "REGION_MODELING"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_GLOBAL",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-global@220e5cd9c9d04e206749b1a476f8d8a4e05c337f:README.md"
+      ],
+      "fqdn": "global.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-global",
+      "system_ref": "GLOBAL.OS"
     },
     {
-      "product": "STUDIOS.OS",
-      "repository": "ogx-studios",
-      "fqdn": "ogxstudios.com"
+      "capabilities": [
+        "CREATIVE_PRODUCTION",
+        "MEDIA_PIPELINES",
+        "PUBLICATION_WORKFLOWS",
+        "RIGHTS_LINEAGE"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_STUDIOS",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-studios@b7d35b7185bfafbf3f6027c8409d2fa8ffa8aab5:README.md"
+      ],
+      "fqdn": "studios.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-studios",
+      "system_ref": "STUDIOS.OS"
     },
     {
-      "product": "ACADEMY.OS",
-      "repository": "ogx-academy",
-      "fqdn": "ogxacademy.com"
+      "capabilities": [
+        "KNOWLEDGE_MODELING",
+        "LEARNING_PATHWAYS",
+        "QUALIFICATION_PATHWAYS"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_ACADEMY",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-academy@994aa2aff4b05b313ce4ee81717fbf469b2babcb:README.md"
+      ],
+      "fqdn": "academy.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-academy",
+      "system_ref": "ACADEMY.OS"
     },
     {
-      "product": "SHOP.OS",
-      "repository": "ogx-shop",
-      "fqdn": "ogxshop.com"
+      "capabilities": [
+        "COMMERCE_MODELING",
+        "ENTITLEMENT_MODELING",
+        "FULFILLMENT_MODELING",
+        "ORDER_MODELING",
+        "PAYMENT_BOUNDARIES"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_SHOP",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogx-shop@751a413cbcc82daf5d4c411084513a4a692ea3dc:README.md"
+      ],
+      "fqdn": "shop.ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogx-shop",
+      "system_ref": "SHOP.OS"
     },
     {
-      "product": "HORIZON.OS",
-      "repository": "ogxglobalhorizon",
-      "fqdn": "ogxglobalhorizon.com"
+      "capabilities": [
+        "FEDERATION_DIRECTORY",
+        "FEDERATION_PROJECTION",
+        "PUBLIC_DISCOVERY",
+        "ROUTING_DISCOVERY"
+      ],
+      "contract_status": "PROPOSED",
+      "domain_ref": "OGX_GLOBAL_HORIZON",
+      "evidence_refs": [
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-fleet-infrastructure-roadmap-r0.yaml",
+        "DudeStunna1/OGX-PRIME@ea9ffee73a11f9f5e260e6cd7c3f852b26488bb4:.MISSIONS-ADMINISTRATION/contracts/ogx-global-horizon-public-surface-topology-r0.yaml",
+        "DudeStunna1/ogxglobalhorizon@bea365952cade89f1ce0a174cfe5a81d0dc3b89e:README.md"
+      ],
+      "fqdn": "ogxglobalhorizon.com",
+      "repository": "DudeStunna1/ogxglobalhorizon",
+      "system_ref": "HORIZON.OS"
     }
-  ]
+  ],
+  "status": "PROPOSED"
 }

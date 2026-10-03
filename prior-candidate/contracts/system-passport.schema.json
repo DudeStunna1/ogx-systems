@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ogx.systems.system-passport.r0",
+  "title": "OGX SystemPassport R0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "system_ref",
+    "genome_ref",
+    "version",
+    "qualification_state",
+    "authority_state",
+    "recovery_state"
+  ],
+  "properties": {
+    "system_ref": {
+      "type": "string"
+    },
+    "genome_ref": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "qualification_state": {
+      "enum": [
+        "UNTESTED",
+        "TESTED",
+        "QUALIFIED",
+        "REJECTED",
+        "EXPIRED"
+      ]
+    },
+    "authority_state": {
+      "enum": [
+        "NONE",
+        "BOUNDED",
+        "EXPIRED"
+      ]
+    },
+    "recovery_state": {
+      "enum": [
+        "UNPROVEN",
+        "DOCUMENTED",
+        "TESTED",
+        "QUALIFIED"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
+

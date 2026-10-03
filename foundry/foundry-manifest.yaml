@@ -1,24 +1,12 @@
-version: "0.1.0"
+version: "0.2.0"
 status: PROPOSED
-foundry_ref: OGX_SYSTEM_FOUNDRY_R0
+canonical: false
+foundry_ref: OGX_SYSTEM_FOUNDRY_R2_PROPOSAL
+qualification_scope: CLOUD_BUILD_CONTRACT_ONLY
+default_effect: E0_LOCAL_ONLY
+ZBOOK_INSTALLED: false
+activation: false
 input_contracts:
   - contracts/system-genome.schema.json
   - contracts/system-passport.schema.json
-outputs:
-  - SYSTEM_BLUEPRINT
-  - BUILD_MANIFEST
-  - SYSTEM_PASSPORT
-  - QUALIFICATION_PLAN
-  - RECOVERY_PLAN
-gates:
-  - GENOME_VALID
-  - AUTHORITY_BOUND
-  - EFFECT_CEILING_BOUND
-  - BUILD_REPRODUCIBLE
-  - TESTS_PASS
-  - RECOVERY_DEFINED
-  - EVIDENCE_COMPLETE
-rules:
-  - BUILD_NE_AUTHORIZE_NE_DEPLOY
-  - TESTED_NE_QUALIFIED_NE_ACTIVATED
-  - NO_EXTERNAL_EFFECT_WITHOUT_EXPLICIT_AUTHORIZATION
+output_scope: GENERATED_BLUEPRINT_ONLY

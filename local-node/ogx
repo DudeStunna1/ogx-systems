@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
-set -euo pipefail
-ROOT="${OGX_HOME:-$HOME/.local/share/ogx}"
-STATE="${OGX_STATE_HOME:-$HOME/.local/state/ogx}"
-case "${1:-status}" in
- status) echo "OGX_LOCAL_NODE=INSTALLED"; echo "ROOT=$ROOT"; echo "STATE=$STATE"; echo "EFFECT_CEILING=E0_LOCAL_ONLY";;
- doctor) test -d "$ROOT/releases" && test -d "$STATE" && echo "OGX_DOCTOR=PASS";;
- fleet) find "$ROOT/releases" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort;;
- *) echo "usage: ogx {status|doctor|fleet}" >&2; exit 2;;
-esac
+#!/usr/bin/env python3
+import json, sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from release_store import status
+if len(sys.argv)!=3 or sys.argv[1]!='status':
+    print('usage: ogx status <cloud-fixture-root>',file=sys.stderr)
+    raise SystemExit(2)
+print(json.dumps(status(sys.argv[2]),sort_keys=True))

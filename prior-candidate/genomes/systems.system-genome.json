@@ -1,0 +1,24 @@
+{
+  "system_ref": "SYSTEMS.OS",
+  "domain_ref": "OGX_SYSTEMS",
+  "capabilities": [
+    "SYSTEM_ENGINEERING",
+    "RUNTIME_ENGINEERING",
+    "SYSTEM_BLUEPRINT_GENERATION",
+    "CAPABILITY_REGISTRY",
+    "RECOVERY_ENGINEERING",
+    "QUALIFICATION_ENGINEERING"
+  ],
+  "interfaces": [
+    "OGX_PRIME_GOVERNED_CONTRACT",
+    "SYSTEM_FOUNDRY_R1"
+  ],
+  "runtime_profiles": [
+    "DEBIAN_13_X86_64",
+    "REPOSITORY_BLUEPRINT"
+  ],
+  "effect_classes": [
+    "E0_NO_EXTERNAL_EFFECT"
+  ]
+}
+
